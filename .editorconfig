@@ -1,0 +1,34 @@
+; top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.js]
+indent_size = 2
+
+[*.yaml]
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[*.css]
+indent_size = 2
+
+[*.sass]
+indent_size = 2
+
+[*.less]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[.eslintrc]
+indent_size = 2
