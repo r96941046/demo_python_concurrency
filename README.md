@@ -1,8 +1,5 @@
-## PyCon Taiwan 2016
+## Demo files for concurrency and parallelism in Python
 
-## Strategies for concurrency and parallelism in Python
-
-### Demo files
 ### python 2.7
 
 #### Synchronous
