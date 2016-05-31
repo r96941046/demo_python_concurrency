@@ -5,6 +5,7 @@ from urllib import urlencode
 from Queue import Queue
 from threading import Thread
 
+from helpers import config
 from helpers.progress import Progress
 from helpers.parseArgs import parse_args
 from helpers.speechDownloader import SpeechDownloader
@@ -15,22 +16,14 @@ CWD = os.getcwd()
 
 class SpeechDownloadService(object):
 
-    SPEECH_URL = 'http://translate.google.com/translate_tts?'
-    TEXT_FILE_NAME = 'vocabulary.txt'
-    DOWNLOAD_DIR_NAME = 'Files'
-    DOWNLOAD_FILE_TYPE = '.mp3'
-    REQUEST_HEADER = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
-    }
-
     # Size of thread pool
     THREAD_POOL_SIZE = 8
 
     def __init__(self, language, task_path):
         self._language = language
         self._task_path = task_path
-        self._text_file_path = self._task_path + self.TEXT_FILE_NAME
-        self._download_dir = self._task_path + self.DOWNLOAD_DIR_NAME
+        self._text_file_path = self._task_path + config.TEXT_FILE_NAME
+        self._download_dir = self._task_path + config.DOWNLOAD_DIR_NAME
 
     def setup_download_dir(self):
         download_dir = self._download_dir
@@ -58,16 +51,17 @@ class SpeechDownloadService(object):
             for text in f:
                 text = text.rstrip('\n')
                 encoded_args = urlencode({
-                    'tl': language,
-                    'q': text
+                    'hl': language,
+                    'src': text,
+                    'key': config.API_KEY
                 })
 
-                url = self.SPEECH_URL + encoded_args
-                download_path = os.path.join(download_dir, text + self.DOWNLOAD_FILE_TYPE)
+                url = config.SPEECH_URL + encoded_args
+                download_path = os.path.join(download_dir, text + config.DOWNLOAD_FILE_TYPE)
 
                 # queue accepts only one object
                 queue.put(
-                    (url, self.REQUEST_HEADER, download_path)
+                    (url, download_path)
                 )
 
         # Create 8 worker threads
@@ -93,8 +87,8 @@ class SpeechDownloadThread(Thread):
     def run(self):
         while not self.queue.empty():
             # Get the work from the queue and run
-            url, header, download_path = self.queue.get()
-            downloader = SpeechDownloader(url, header, download_path)
+            url, download_path = self.queue.get()
+            downloader = SpeechDownloader(url, download_path)
             downloader.download()
             self.queue.count += 1
             self.queue.progress.update(self.queue.count)

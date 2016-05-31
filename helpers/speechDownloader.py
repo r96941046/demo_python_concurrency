@@ -11,6 +11,7 @@ class SpeechDownloader(object):
         # python 2.7 bug: instance returned by urlopen does not implement __exit__
         # so context manager isn't supported for urlopen()
         try:
+            print self._url
             request = Request(self._url)
             speech = urlopen(request)
             with open(self._download_path, 'wb') as f:
