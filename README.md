@@ -22,9 +22,9 @@ python multipleProcesses.py
 
 #### RQ worker
 
-1. Install vagrant
-2. Install chef-dk for berkshelf https://downloads.chef.io/chef-dk/mac/#/
-3. Run
+- Install vagrant
+- Install chef-dk for berkshelf https://downloads.chef.io/chef-dk/mac/#/
+- Run
 ```
 vagrant plugin install vagrant-berkshelf
 vagrant plugin install vagrant-omnibus
@@ -36,7 +36,7 @@ cd vagrant
 . set_env.sh
 python rqworker.py
 ```
-4. Run in another terminal session at folder root
+- Run in another terminal session at folder root
 ```
 python rqworker_client.py
 ```
