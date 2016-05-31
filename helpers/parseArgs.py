@@ -9,10 +9,10 @@ def parse_args(CWD):
     parser = optparse.OptionParser(usage)
 
     help = 'The language of speech to get from text'
-    parser.add_option('--lang', type='str', default='en', help=help)
+    parser.add_option('--lang', type='str', default='en-us', help=help)
 
     help = 'The task destination folder'
-    parser.add_option('--dir', type='str', help=help)
+    parser.add_option('--dir', type='str', default='Downloads', help=help)
 
     options, args = parser.parse_args()
 
