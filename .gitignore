@@ -1,4 +1,7 @@
 .DS_Store
+*.lock
 *.swp
+*.rdb
+.vagrant/
 helpers/*.pyc
 Downloads/Files/*.mp3
