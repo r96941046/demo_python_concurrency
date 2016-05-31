@@ -1,18 +1,18 @@
 ## Demo files for concurrency and parallelism in Python
 
-### python 2.7
+python 2.7
 
 #### Synchronous
 ```python
 python synchronous.py
 ```
 
-#### Multiple thread
+#### Multiple threads
 ```python
 python multipleThreads.py
 ```
 
-#### Multiple process
+#### Multiple processes
 ```python
 python multipleProcesses.py
 ```
