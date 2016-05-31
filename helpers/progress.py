@@ -4,10 +4,11 @@ import sys
 
 class Progress(object):
 
-    def __init__(self, total_count, bar_length=30):
+    def __init__(self, total_count, bar_length=30, flush=True):
 
         self.total_count = total_count
         self.bar_length = bar_length
+        self.flush = flush
         self.start_time = datetime.now()
 
     def update(self, current_count):
@@ -34,5 +35,9 @@ class Progress(object):
             status
         )
 
-        sys.stdout.write(text)
-        sys.stdout.flush()
+        if self.flush:
+            sys.stdout.write(text)
+            sys.stdout.flush()
+
+        elif progress == 1.0:
+            sys.stdout.write(text)

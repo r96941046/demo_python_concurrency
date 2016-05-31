@@ -32,7 +32,7 @@ class SpeechDownloadService(object):
         download_dir = self.setup_download_dir()
         with open(self._text_file_path, 'r') as f:
 
-            progress = Progress(len(f.readlines()))
+            progress = Progress(len(f.readlines()), flush=False)
             f.seek(0)
             count = 0
 
